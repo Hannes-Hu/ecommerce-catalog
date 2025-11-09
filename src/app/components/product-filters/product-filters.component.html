@@ -1,0 +1,100 @@
+<div class="filters-card card shadow-sm">
+  <div class="card-header bg-light">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="mb-0">Filters</h6>
+      <button *ngIf="hasActiveFilters() | async" 
+              class="btn btn-sm btn-outline-secondary" 
+              (click)="clearFilters()">
+        Clear All
+      </button>
+    </div>
+  </div>
+  
+  <div class="card-body">
+    
+    <!-- Sort Options -->
+    <div class="filter-section mb-4">
+      <label class="form-label fw-semibold">Sort By</label>
+      <select class="form-select" [(ngModel)]="sortBy" (ngModelChange)="onSortChange($event)">
+        <option value="">Recommended</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating-desc">Highest Rated</option>
+        <option value="name-asc">Name: A to Z</option>
+        <option value="name-desc">Name: Z to A</option>
+      </select>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="filter-section mb-4">
+      <label class="form-label fw-semibold">Category</label>
+      <select class="form-select" [(ngModel)]="categoryFilter" (ngModelChange)="onCategoryChange($event)">
+        <option value="">All Categories</option>
+        <option *ngFor="let category of availableCategories$ | async" [value]="category">
+          {{ category | titlecase }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Price Range Filter -->
+    <div class="filter-section mb-4">
+      <label class="form-label fw-semibold">Price Range</label>
+      <div class="row g-2">
+        <div class="col-6">
+          <input type="number" 
+                 class="form-control" 
+                 placeholder="Min" 
+                 [(ngModel)]="minPrice"
+                 (change)="onPriceChange()">
+        </div>
+        <div class="col-6">
+          <input type="number" 
+                 class="form-control" 
+                 placeholder="Max" 
+                 [(ngModel)]="maxPrice"
+                 (change)="onPriceChange()">
+        </div>
+      </div>
+      <small class="text-muted">
+        Enter min and max prices
+      </small>
+    </div>
+
+    <!-- Rating Filter -->
+    <div class="filter-section">
+      <label class="form-label fw-semibold">Minimum Rating</label>
+      <div class="rating-filters">
+        <div class="form-check" *ngFor="let rating of [4, 3, 2, 1]">
+          <input class="form-check-input" 
+                 type="radio" 
+                 name="ratingFilter" 
+                 [id]="'rating-' + rating"
+                 [value]="rating"
+                 [(ngModel)]="minRating"
+                 (ngModelChange)="onRatingChange($event)">
+          <label class="form-check-label" [for]="'rating-' + rating">
+            <span class="text-warning">
+              <i class="bi bi-star-fill" *ngFor="let star of [1,2,3,4,5]"
+                 [class.text-warning]="star <= rating"
+                 [class.text-muted]="star > rating"></i>
+            </span>
+            {{ rating }}+ stars
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" 
+                 type="radio" 
+                 name="ratingFilter" 
+                 id="rating-all"
+                 [value]="null"
+                 [(ngModel)]="minRating"
+                 (ngModelChange)="onRatingChange($event)">
+          <label class="form-check-label" for="rating-all">
+            All Ratings
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

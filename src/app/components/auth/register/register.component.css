@@ -1,0 +1,79 @@
+.card {
+  background: var(--black-light);
+  border: 1px solid var(--black-lighter);
+  border-radius: 12px;
+  box-shadow: var(--shadow-dark);
+  border: none;
+}
+
+.card-header {
+  background: var(--gradient-orange) !important;
+  border: none !important;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1.5rem;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.form-control {
+  background: var(--black-base);
+  border: 2px solid var(--black-lighter);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  background: var(--black-base);
+  border-color: var(--orange-primary);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Enhanced Demo Login Button */
+.btn-demo {
+  background: transparent;
+  border: 2px solid var(--orange-secondary);
+  color: var(--orange-secondary);
+  transition: all 0.3s ease;
+}
+
+.btn-demo:hover {
+  background: var(--orange-secondary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Alert styling */
+.alert {
+  border: none;
+  border-radius: 8px;
+}
+
+.alert-danger {
+  background: rgba(220, 53, 69, 0.1);
+  color: #f8d7da;
+  border-left: 4px solid #dc3545;
+}
+
+/* Link styling */
+.text-primary {
+  color: var(--orange-primary) !important;
+}
+
+.text-success {
+  color: var(--orange-secondary) !important;
+}
+
+a.text-primary:hover,
+a.text-success:hover {
+  color: var(--orange-accent) !important;
+}

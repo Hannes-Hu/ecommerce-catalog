@@ -1,0 +1,279 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Checkout Steps -->
+    <div class="col-12 mb-4">
+      <div class="checkout-steps">
+        <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+          <span class="step-number">1</span>
+          <span class="step-label">Shipping</span>
+        </div>
+        <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+          <span class="step-number">2</span>
+          <span class="step-label">Billing</span>
+        </div>
+        <div class="step" [class.active]="currentStep === 3" [class.completed]="currentStep > 3">
+          <span class="step-number">3</span>
+          <span class="step-label">Payment</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-8">
+      <!-- Step 1: Shipping -->
+      <div *ngIf="currentStep === 1" class="checkout-step">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0"><i class="bi bi-truck me-2"></i>Shipping Address</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="shippingForm" (ngSubmit)="onShippingSubmit()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">First Name *</label>
+                  <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Last Name *</label>
+                  <input type="text" class="form-control" formControlName="lastName">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Email *</label>
+                  <input type="email" class="form-control" formControlName="email">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Phone *</label>
+                  <input type="tel" class="form-control" formControlName="phone">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Address Line 1 *</label>
+                <input type="text" class="form-control" formControlName="addressLine1">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Address Line 2</label>
+                <input type="text" class="form-control" formControlName="addressLine2">
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">City *</label>
+                  <input type="text" class="form-control" formControlName="city">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">State *</label>
+                  <input type="text" class="form-control" formControlName="state">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">ZIP Code *</label>
+                  <input type="text" class="form-control" formControlName="zipCode">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Country *</label>
+                <input type="text" class="form-control" formControlName="country">
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <a routerLink="/cart" class="btn btn-outline-secondary">
+                  <i class="bi bi-arrow-left me-2"></i>Back to Cart
+                </a>
+                <button type="submit" class="btn btn-primary" [disabled]="shippingForm.invalid">
+                  Continue to Billing <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Billing -->
+      <div *ngIf="currentStep === 2" class="checkout-step">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0"><i class="bi bi-credit-card me-2"></i>Billing Address</h4>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sameAsShipping" 
+                       [checked]="sameAsShipping" (change)="onSameAsShippingChange($any($event.target).checked)">
+                <label class="form-check-label" for="sameAsShipping">
+                  Same as shipping address
+                </label>
+              </div>
+            </div>
+
+            <form [formGroup]="billingForm" (ngSubmit)="onBillingSubmit()" [class.d-none]="sameAsShipping">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">First Name *</label>
+                  <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Last Name *</label>
+                  <input type="text" class="form-control" formControlName="lastName">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Address Line 1 *</label>
+                <input type="text" class="form-control" formControlName="addressLine1">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Address Line 2</label>
+                <input type="text" class="form-control" formControlName="addressLine2">
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">City *</label>
+                  <input type="text" class="form-control" formControlName="city">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">State *</label>
+                  <input type="text" class="form-control" formControlName="state">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="form-label">ZIP Code *</label>
+                  <input type="text" class="form-control" formControlName="zipCode">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Country *</label>
+                <input type="text" class="form-control" formControlName="country">
+              </div>
+            </form>
+
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-outline-secondary" (click)="prevStep()">
+                <i class="bi bi-arrow-left me-2"></i>Back to Shipping
+              </button>
+              <button type="button" class="btn btn-primary" (click)="onBillingSubmit()">
+                Continue to Payment <i class="bi bi-arrow-right ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div *ngIf="currentStep === 3" class="checkout-step">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0"><i class="bi bi-lock me-2"></i>Payment Method</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="paymentForm" (ngSubmit)="onPaymentSubmit()">
+              <div class="mb-3">
+                <label class="form-label">Card Number *</label>
+                <input type="text" class="form-control" formControlName="cardNumber" 
+                       placeholder="1234 5678 9012 3456" maxlength="16">
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Expiry Date *</label>
+                  <input type="text" class="form-control" formControlName="expiryDate" 
+                         placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">CVV *</label>
+                  <input type="text" class="form-control" formControlName="cvv" 
+                         placeholder="123" maxlength="4">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Name on Card *</label>
+                <input type="text" class="form-control" formControlName="nameOnCard">
+              </div>
+
+              <!-- Loading State -->
+              <div *ngIf="loading$ | async" class="text-center py-3">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Processing...</span>
+                </div>
+                <p class="mt-2 mb-0">Processing your order...</p>
+              </div>
+
+              <!-- Error Message -->
+              <div *ngIf="error$ | async as error" class="alert alert-danger">
+                <i class="bi bi-exclamation-triangle me-2"></i>{{ error }}
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" (click)="prevStep()">
+                  <i class="bi bi-arrow-left me-2"></i>Back to Billing
+                </button>
+                <button type="submit" class="btn btn-success" 
+                        [disabled]="paymentForm.invalid || (loading$ | async)">
+                  <i class="bi bi-lock-fill me-2"></i>
+                  Place Order
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Summary Sidebar -->
+    <div class="col-lg-4">
+      <div class="card order-summary-sidebar">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-receipt me-2"></i>Order Summary</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="orderSummary$ | async as summary" class="order-summary">
+            <div class="d-flex justify-content-between mb-2">
+              <span>Items ({{ summary.itemCount }}):</span>
+              <span>${{ summary.subtotal | number:'1.2-2' }}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Shipping:</span>
+              <span class="text-success">FREE</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Tax:</span>
+              <span>${{ summary.tax | number:'1.2-2' }}</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-3">
+              <strong>Total:</strong>
+              <strong class="text-primary">${{ summary.total | number:'1.2-2' }}</strong>
+            </div>
+          </div>
+
+          <!-- Cart Items Preview -->
+          <div class="cart-items-preview">
+            <h6 class="mb-3">Items in Cart</h6>
+            <div *ngFor="let item of (cart$ | async)?.items" class="cart-preview-item">
+              <div class="row align-items-center">
+                <div class="col-3">
+                  <img [src]="item.product.image" [alt]="item.product.title" 
+                       class="img-fluid rounded">
+                </div>
+                <div class="col-6">
+                  <h6 class="mb-1">{{ item.product.title | slice:0:30 }}{{ item.product.title.length > 30 ? '...' : '' }}</h6>
+                  <small class="text-muted">Qty: {{ item.quantity }}</small>
+                </div>
+                <div class="col-3 text-end">
+                  <strong>${{ (item.product.price * item.quantity) | number:'1.2-2' }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

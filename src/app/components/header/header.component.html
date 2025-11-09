@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold me-4" routerLink="/">
+      FakeStore
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav" aria-controls="navbarNav" 
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Main navigation links -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact: true}">
+            All Products
+          </a>
+        </li>
+        <li class="nav-item dropdown" *ngFor="let category of categories$ | async">
+          <a class="nav-link dropdown-toggle" href="#" role="button" 
+             data-bs-toggle="dropdown" aria-expanded="false">
+            {{ category | titlecase }}
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/category', category]">
+                {{ category | titlecase }}
+              </a>
+            </li>
+          </ul>
+        </li>
+        
+        <!-- Admin Link (only show for admin users) -->
+        <li class="nav-item" *ngIf="(isAuthenticated$ | async) && (currentUser$ | async)?.email === 'admin@example.com'">
+          <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">
+            Admin
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Right side items - Auth & Cart -->
+      <div class="navbar-nav align-items-center">
+        
+        <!-- Auth Section -->
+        <div class="nav-item dropdown" *ngIf="isAuthenticated$ | async; else notAuthenticated">
+          <a class="nav-link dropdown-toggle text-white" href="#" role="button" 
+             data-bs-toggle="dropdown" aria-expanded="false">
+            {{ (currentUser$ | async)?.firstName }}
+            <!-- Admin Badge -->
+            <span *ngIf="(currentUser$ | async)?.email === 'admin@example.com'" 
+                  class="badge bg-warning ms-1">Admin</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <!-- Admin Dashboard -->
+            <li *ngIf="(currentUser$ | async)?.email === 'admin@example.com'">
+              <a class="dropdown-item" routerLink="/admin/dashboard">
+                Admin Dashboard
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/account">
+                My Account
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/orders">
+                Orders
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item text-danger" (click)="logout()">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <ng-template #notAuthenticated>
+          <div class="nav-item">
+            <a class="nav-link text-white" routerLink="/login">
+              Login
+            </a>
+          </div>
+        </ng-template>
+
+        <!-- Cart Icon -->
+        <div class="nav-item ms-2">
+          <app-cart-icon></app-cart-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,182 @@
+<div class="container-fluid mt-4">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2>Admin Dashboard</h2>
+      <p class="text-muted">Welcome to the administration panel</p>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card stat-card bg-primary text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Total Revenue</h6>
+              <h3 class="mb-0">$1,250</h3>
+            </div>
+            <div class="align-self-center">
+              <span class="display-4 opacity-50">$</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card stat-card bg-success text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Total Orders</h6>
+              <h3 class="mb-0">24</h3>
+            </div>
+            <div class="align-self-center">
+              <span class="display-4 opacity-50">📦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card stat-card bg-warning text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Total Users</h6>
+              <h3 class="mb-0">156</h3>
+            </div>
+            <div class="align-self-center">
+              <span class="display-4 opacity-50">👥</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card stat-card bg-danger text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="card-title">Pending Orders</h6>
+              <h3 class="mb-0">3</h3>
+            </div>
+            <div class="align-self-center">
+              <span class="display-4 opacity-50">⏰</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Quick Actions</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <a routerLink="/admin/products" class="btn btn-primary w-100">
+                Manage Products
+              </a>
+            </div>
+            <div class="col-md-3 mb-3">
+              <a routerLink="/admin/orders" class="btn btn-success w-100">
+                Manage Orders
+              </a>
+            </div>
+            <div class="col-md-3 mb-3">
+              <a routerLink="/admin/users" class="btn btn-warning w-100">
+                Manage Users
+              </a>
+            </div>
+            <div class="col-md-3 mb-3">
+              <a routerLink="/" class="btn btn-outline-secondary w-100">
+                View Store
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Navigation Cards -->
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card admin-nav-card">
+        <div class="card-body text-center">
+          <h5 class="text-primary mb-3">Manage Products</h5>
+          <p class="text-muted">Add, edit, or remove products from your store</p>
+          <a routerLink="/admin/products" class="btn btn-primary">View Products</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card admin-nav-card">
+        <div class="card-body text-center">
+          <h5 class="text-success mb-3">Manage Orders</h5>
+          <p class="text-muted">View and process customer orders</p>
+          <a routerLink="/admin/orders" class="btn btn-success">View Orders</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card admin-nav-card">
+        <div class="card-body text-center">
+          <h5 class="text-warning mb-3">Manage Users</h5>
+          <p class="text-muted">View and manage user accounts</p>
+          <a routerLink="/admin/users" class="btn btn-warning">View Users</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Recent Activity</h5>
+        </div>
+        <div class="card-body">
+          <div class="list-group">
+            <div class="list-group-item">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">New order received</h6>
+                <small class="text-muted">2 minutes ago</small>
+              </div>
+              <p class="mb-1">Order #ORD-12345 from John Doe</p>
+              <small class="text-muted">Total: $125.99</small>
+            </div>
+            <div class="list-group-item">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">User registration</h6>
+                <small class="text-muted">1 hour ago</small>
+              </div>
+              <p class="mb-1">New user: sarah&#64;example.com</p>
+              <small class="text-muted">Registered via website</small>
+            </div>
+            <div class="list-group-item">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Product low stock alert</h6>
+                <small class="text-muted">3 hours ago</small>
+              </div>
+              <p class="mb-1">"Wireless Headphones" stock below 10 units</p>
+              <small class="text-muted">Current stock: 8 units</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
